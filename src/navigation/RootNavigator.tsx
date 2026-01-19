@@ -1,6 +1,6 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import type { RootStackParamList } from './types';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import type {RootStackParamList} from './types';
 import LoaderScreen from '../screens/LoaderScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import BottomTabs from './BottomTabs';
@@ -14,9 +14,8 @@ export default function RootNavigator() {
       screenOptions={{
         headerShown: false,
         animation: 'fade',
-        contentStyle: { backgroundColor: 'transparent' }, 
-      }}
-    >
+        contentStyle: {backgroundColor: 'transparent'},
+      }}>
       <Stack.Screen name="Loader" component={LoaderScreen} />
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
       <Stack.Screen name="Tabs" component={BottomTabs} />
