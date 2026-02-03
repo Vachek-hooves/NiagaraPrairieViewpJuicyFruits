@@ -328,10 +328,18 @@ export default function App() {
           // Don't set hasVisitedBefore here - wait for AppsFlyer conversion data
 
           try {
-            const response = await fetch(visitUrl);
+            const userAgent = await DeviceInfo.getUserAgent();
+            // console.log('User-Agent:', userAgent);
+            const response = await fetch(visitUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'User-Agent': userAgent, // Plain string, not JSON
+              },
+            });
 
             console.log('URL status:', response.status);
-            console.log('visitUrl', visitUrl);
+            // console.log('visitUrl', visitUrl);
 
             if (response.status === 404) {
               console.log('❌ URL status:', response.status);
@@ -341,6 +349,7 @@ export default function App() {
 
             if (response.status === 200) {
               await AsyncStorage.setItem('kloakSuccess', 'true');
+              await AsyncStorage.setItem('hasVisitedBefore', 'true');
 
               if (currentDate >= targetData) {
                 setIsReadyToVisit(true);
